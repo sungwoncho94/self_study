@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <!-- vue를 사용하기 위해 script 안에 넣어줘야함 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue 복습</title>
+</head>
+<body>
+  <div id="app">
+    {{ message }} - {{ count }}
+    <button @click="plus">plus</button>
+    <button v-on:click="minus">minus</button>
+  </div>
+
+  <script>
+  // vue 코드가 되는 곳, app은 vue의 인스턴스
+  const app = new Vue({
+    el: '#app',  // app과 바인딩된 value값
+    data: {
+      message: 'Vue Start',
+      count: 0
+    },
+    methods: {
+      // plus라는 함수는 count라는 변수를 ++하는 역할
+      plus: function() {
+        this.count++
+      },
+      minus: function() {
+        this.count--
+      },
+    }
+  })
+  
+  </script>
+</body>
+</html>

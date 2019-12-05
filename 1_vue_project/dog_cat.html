@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- vue를 사용하는 script -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- axios 사용하는 script -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Dog&Cat</title>
+  <style>
+    img {
+      width: 400px;
+      height: 400px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 먼저 app이란 이름의 div만들어주기 -->
+  <div id="app">
+    <!-- 일단 댕댕, 야옹 버튼 두개가 있어야 한다 -->
+    <button @click="getDogImage">댕댕</button>
+    <button @click="getCatImage">야옹</button>
+    <img v-bind:src="ImageUrl" alt="댕댕야옹">
+
+  </div>
+
+  <script>
+    const app = new Vue({
+      // #app이란 아이디를 가진 div에 적용
+      el: '#app',
+      // 필요한 데이터구조 정의
+      data: {
+        ImageUrl: "",
+      },
+      // 필요한 함수 정의
+      methods: {
+        // 강아지 사진을 가져오는 getDogImage function 정의
+        getDogImage: function() {
+          const DOG_URL = "https://dog.ceo/api/breeds/image/random"
+          axios.get(DOG_URL)
+            .then((response) => {
+              this.ImageUrl = response.data.message
+            })
+        },
+        getCatImage: async function() {
+          const CAT_URL = "https://api.thecatapi.com/v1/images/search"
+          const response = await axios.get(CAT_URL)
+          axios.get(CAT_URL).then((response) =>
+            this.ImageUrl = response.data[0].url)
+        },
+      },
+      // 최초 vue instance가 생성된 후 실행하는 함수
+      // created: function () {
+      //   this.getCatImage()
+      //   this.getDogImage()
+      // }
+    })
+
+  </script>
+
+</body>
+
+</html>
