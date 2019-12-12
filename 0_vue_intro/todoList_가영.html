@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- vue 사용할 준비 완료 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Todo App</title>
+  <style>
+    .completed {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <h1>Todo APP</h1>
+    <ul>
+      <!-- <li v-for="todo in todos" v-if='!todo.completed' v-on:click='toggleTodo(todo)'>
+        {{ todo.content }}
+      </li>
+      <li v-else @click='toggleTodo(todo)'>[완료!]</li> -->
+
+      <!-- 체크박스 만들기 위 li 와 동일 -->
+      <li v-for="todo in todos" v-bind:class="{ completed: todo.completed }">
+        <input type="checkbox" v-model="todo.completed">
+        {{ todo.content }}
+      </li>
+    </ul>
+    <!-- v-model넣어주면 실시간으로 연동 -->
+    <input v-model="newTodo" type="text" v-on:keydown.enter="addTodo">
+
+    <footer>
+      <button v-on:click="clearCompleted">Clear Completed</button>
+    </footer>
+
+  </div>
+
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        todos: [
+          {
+            content: '저녁 메뉴 고민하기',
+            completed: true,
+          },
+          {
+            content: '사다리 타기',
+            completed: false,
+          },
+          {
+            content: '약속의 2시 낮잠자기',
+            completed: false,
+          },
+          {
+            content: '야자하기',
+            completed: false,
+          },
+        ],
+        newTodo: '',
+        // 수정할 때 편함 -> activeColor, fontSize 변수로 작성하면 변수 값만 수정하면 편함 
+        activeColor: 'orange',
+        fontSize: 30,
+      },
+      methods: {
+        toggleTodo: function (todo) {
+          todo.completed = !todo.completed
+        },
+        addTodo: function () {
+          this.todos.push({
+            content: this.newTodo,
+            completed: false
+          })
+          this.newTodo = ''
+        },
+        // filter 이용
+        clearCompleted: function () {
+          // Completed가 true인 모든 todo를 리스트에서 삭제한다.
+          // => Completed가 false인 todo만 남는다
+
+          // this -> Vue함수의 특정한 데이터에 접근을 하겠다
+          this.todos = this.todos.filter(todo => {
+            return !todo.completed
+          })
+
+          // // for문 사용
+          // clearCompleted: function() {
+          //   const newTodos = []
+
+          //   for (const todo of this.todos) {
+          //     if (!todo.completed) newTodos.push(todo)
+          //   }
+          //   this.todos = newTodos
+        }
+      },
+    })
+    // todo.pop() 하면 하나씩 없어짐
+
+
+  </script>
+
+</body>
+
+</html>
