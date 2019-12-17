@@ -2,3 +2,7 @@
 .showing {
     display: block;
 }
+
+body {
+    color: bisque;
+}
