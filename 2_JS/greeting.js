@@ -2,6 +2,8 @@ const form = document.querySelector(".js-form")
 const input = form.querySelector("input")
 const greeting = document.querySelector(".js-greetings")
 
+// console -> App -> Key:Value 로 currentUser:<username>이 존재함
+// loadName()이 실행될 때, currentUser라는 변수에 localStorage에서 currentUser를 가져온 후, currentUser에 넣음
 const USER_LOCALSTRORAGE = "currentUser"
 const SHOWING_ON = "showing"
 
@@ -35,7 +37,7 @@ function paintGreeting(text) {
 function loadName() {
     const currentUser = localStorage.getItem(USER_LOCALSTRORAGE)
     if (currentUser === null) {
-        askName()
+        askName()                                                                                                                                                                                                                                                                                             
     } else {
         paintGreeting(currentUser)
     }

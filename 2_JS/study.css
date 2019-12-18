@@ -1,8 +1,25 @@
+.form, .greetings {
+    display: none;
+}
 
+/* .form .greetings가 먼저 정의되어야함 */
+/* (1)display: none 속성이 먼저 적용된 후에, .showing 속성이 적용되어야 뒤 class에 추가되기 때문 */
 .showing {
     display: block;
 }
 
+.clicked {
+    color: aquamarine;
+}
+
+h1 {
+    color: blueviolet;
+}
+
+.btn {
+    cursor: pointer;
+}
+
 body {
-    color: bisque;
+    color: darkcyan;
 }
