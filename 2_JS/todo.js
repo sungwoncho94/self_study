@@ -5,14 +5,31 @@ const toDoList = document.querySelector(".js-toDoList")
 
 const TODOS_LS = 'toDos'
 // 할일 목록을 여러개일수도 있기 때문에 array로 만든다
-const toDos = []
+// toDos는 목록이 계속 삭제되고 추가될 수 있기 때문에 const가 아니라 let으로 만들어준다
+let toDos = []
+
+function deleteToDo(event) {
+    // delete (1) 내가 클릭한 버튼이 속한 parent(li) 번호를 알아야한다
+    // console.dir(event.target.parentNode)
+    const btn = event.target
+    const li = btn.parentNode
+    toDoList.removeChild(li)
+    // delete (2) 새로고침해도 지워진 toDos가 남아있도록 설정해줘야한다
+    const cleanToDos = toDos.filter(function(toDo) {
+        return toDo.id !== parseInt(li.id)
+    })
+    console.log(cleanToDos)
+    console.log(toDos)
+    // 바뀐 toDos(cleanToDos)로 toDos를 바꿔준다
+    toDos = cleanToDos
+    saveToDos()
+}
 
 // localStorage에 todoList가 남을 수 있도록 저장해줌
 function saveToDos() {
     localStorage.setItem(TODOS_LS, JSON.stringify(toDos))
     // 이렇게만 저장하면 [object Object]라고 저장됨 (why? : LS에서는 JS의 data를 저장할 수 없다. only string만 저장가능)
     // JSON.stringify명령어 써서 JSON 형태 -> string으로 바꿔서 저장한다
-
 }
 
 function paintToDo(text) {
@@ -25,6 +42,7 @@ function paintToDo(text) {
     // (3) span의 내용으로 input받은 text넣어주기
     span.innerText = text
     delBtn.innerText = "❌"
+    delBtn.addEventListener("click", deleteToDo)
     // (4) span + delBtn을 li로 넣어주기 (하나의 li로 묶는다)
     // .appendChild -> 부모 element 밑에 자식 element를 넣는것
     li.appendChild(span)
