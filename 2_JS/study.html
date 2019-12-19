@@ -11,23 +11,34 @@
 </head>
 
 <body>
-  <div class="js-clock clock">
-    <h1>Time</h1>
+  <span class="js-weather"></span>
+
+  <div class="center">
+    <div class="js-clock clock">
+      <h1>Time</h1>
+    </div>
+
+    <div class="center2">
+      <form class="js-form form">
+        <input type="text" placeholder="What's your name?"/>
+      </form>
+
+      <h4 class="js-greetings greetings"></h4>
+
+      <form class="js-toDoForm">
+        <input type="text" placeholder="Write a to do">
+      </form>
+
+      <ul class="js-toDoList"></ul>
+      
+    </div>
   </div>
 
-  <form class="js-form form">
-    <input type="text" placeholder="What's your name?"/>
-  </form>
 
-  <h4 class="js-greetings greetings"></h4>
-
-  <form class="js-toDoForm">
-    <input type="text" placeholder="Write a to do">
-  </form>
-
-  <ul class="js-toDoList"></ul>
-
-  <span class="js-weather"></span>
+  <!-- 배경화면 어둡게하기 -->
+  <section>
+    <div class="bg"></div>
+  </section>
 
   <!-- js는 body밑에서 참조 -->
   <script src="study.js"></script>
